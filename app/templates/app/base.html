@@ -13,6 +13,8 @@
         <link href-"{%static 'app/css/style.css' %}" rel="stylesheet" />
         <link href-"{%static 'app/css/owl.carousel.min.css' %}" rel="stylesheet" />
         <link href-"{%static 'app/css/all.min.css' %}" rel="stylesheet" />
+
+        <link rel="stylesheet" type="text/css" href="{% static 'app/css/main.css' %}">
         <!-- js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -31,7 +33,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="{% static 'app/images/Neel.png' %}" width="50" height="50" />
+      <img src="{% static 'app/images/Gemini.png' %}" width="200" height=auto />
       </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -50,9 +52,7 @@
             <li><a class="dropdown-item" href="#">Acc</a></li>
             <li><a class="dropdown-item" href="#">Cày thuê</a></li>
             <li><a class="dropdown-item" href="#">Buff bẩn</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+
           </ul>
         </li>
          <li class="nav-item">
@@ -95,10 +95,13 @@
 </nav>
 <!-- main body-->
 {% block banner_slider %}{% endblock banner_slider %}
- {% block main-content %}{% endblock main-content %}
+{% block main-content %}{% endblock main-content %}
+<!-- Giao diện cart -->
+{% block cart_content %}{% endblock cart_content %}
+
 <!--footer-->
-<footer class="container--fluid bg-success text-center fixed-bottom p-2 mt-5">
-    copyright 2022
+<footer class="container-fluid bg-dark text-white text-center fixed-bottom p-2 mt-5">
+    Liên hệ để biết thêm chi tiết
 <footer>
     </body>
 </html>
