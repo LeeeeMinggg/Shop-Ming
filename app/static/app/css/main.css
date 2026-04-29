@@ -220,3 +220,24 @@ h1,h2,h3,h4,h5,h6{
     display: block;
     margin-top: 0;
 }
+.cart-icon {
+    font-size: 24px;
+    color: black;
+    position: relative;
+}
+
+.cart-icon:hover {
+    color: #ff523b;
+    transition: 0.3s;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 2px 6px;
+}
