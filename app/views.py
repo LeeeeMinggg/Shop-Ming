@@ -3,19 +3,39 @@ from django.http import HttpResponse,JsonResponse
 from .models import *
 import json
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 def register(request):
-    form = UserCreationForm()
+    form = CreateUserForm()
     
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
     context = {'form':form}
     return render(request,'app/register.html', context)
-def login(request):
-    context = {}
-    return render(request,'app/login.html', context)
+
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'Tên đăng nhập hoặc mật khẩu sai!')
+
+    return render(request, 'app/login.html')
+def logoutPage(request):
+    logout(request)
+    return redirect('login')
 def home(request):
     if request.user.is_authenticated:
         customer, created = Customer.objects.get_or_create(

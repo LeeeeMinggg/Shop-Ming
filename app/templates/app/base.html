@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -60,28 +61,27 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            user1  
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
-            <li><a class="dropdown-item" href="{% url 'cart' %}">Đơn hàng</a></li>
-            <li><a class="dropdown-item" href="#">Thoát</a></li>
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
 
-          </ul>
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <span class="nav-link">Hello! {{ request.user.username }}</span>
         </li>
-         <li class="nav-item">
-         
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Đăng xuất</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="#">Đăng nhập</a>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Đăng nhập</a>
         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="#">Đăng kí</a>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Đăng kí</a>
         </li>
-    </ul>
+    {% endif %}
+
+</ul>
    <div class="form-inline my-2 my-lg-0 position-relative">
     <a href="{% url 'cart' %}">
     <i class="fas fa-shopping-cart cart-icon"></i>
@@ -96,6 +96,7 @@
 <!-- Giao diện cart -->
 {% block cart_content %}{% endblock cart_content %}
 {% block content_checkout %}{% endblock content_checkout %}
+ {% block register %} {% endblock register %}
 
 <!--footer-->
 <footer class="container-fluid bg-dark text-white text-center p-2 mt-5">
