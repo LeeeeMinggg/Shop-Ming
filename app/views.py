@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+def search(request):
+    return render(request,'app/search.html')
 def register(request):
     form = CreateUserForm()
     
@@ -13,6 +15,7 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('login')
     context = {'form':form}
     return render(request,'app/register.html', context)
 
