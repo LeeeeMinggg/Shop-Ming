@@ -246,3 +246,14 @@ h1,h2,h3,h4,h5,h6{
     padding: 40px 15px 80px;
     background: #eee;
 }
+.btn-price-red {
+    background-color: #f04a2a;
+    border-color: #f04a2a;
+    color: white;
+}
+
+.btn-price-red:hover {
+    background-color: #d63b1f;
+    border-color: #c9351b;
+    color: white;
+}

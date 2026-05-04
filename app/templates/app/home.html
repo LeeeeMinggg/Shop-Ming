@@ -76,7 +76,7 @@
           <button data-product="{{ product.id }}" data-action="add" class="btn btn-add-cart update-cart" type="button">
     Add cart
 </button>
-          <a class="btn btn-view" href="#">View</a>
+          <a class="btn btn-view" href="{% url 'detail' %}?id={{product.id}}">View</a>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %}
 {% load static %}
-
+{% load humanize %}
 
 <html>
     <head>
@@ -13,7 +13,45 @@
     </head>
     <body>
         {% block register %}
-        <h5> Result search for </h5>
+        <h5> Result search for {{searched}} </h5><br />
+       <div class="row" style="width:100%;">
+  {% for product in keys %}
+  <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+    <div class="product-card">
+
+      <div class="product-image-wrap">
+        {% if product.image %}
+          <img class="thumbnail" src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+          <img class="thumbnail" src="{% static 'app/images/placeholder.png' %}" alt="{{ product.name }}">
+        {% endif %}
+
+    
+      </div>
+
+      <div class="box-element product">
+        <h6 class="product-name">{{ product.name }}</h6>
+
+        <div class="price-group">
+          {% if product.old_price %}
+            <span class="old-price">{{ product.old_price|floatformat:0|intcomma }}đ</span>
+          {% endif %}
+          <span class="product-price">{{ product.price|floatformat:0|intcomma }}đ</span>
+        </div>
+
+        <div class="product-buttons">
+          <button data-product="{{ product.id }}" data-action="add" class="btn btn-add-cart update-cart" type="button">
+    Add cart
+</button>
+          <a class="btn btn-view" href="#">View</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+      </div>
         {% endblock register %}
     </body>
 </html>
