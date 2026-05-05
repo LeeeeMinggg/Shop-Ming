@@ -6,6 +6,24 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+def category(request):
+    categories = Category.objects.filter(is_sub=False)
+    active_category = request.GET.get('category', '')
+
+    if active_category:
+        products = Product.objects.filter(category__slug=active_category)
+    else:
+        products = Product.objects.all()
+
+    context = {
+        'categories': categories,
+        'products': products,
+        'active_category': active_category,
+    }
+    return render(request, 'app/category.html', context)
+
+
+    
 
 def detail(request):
     if request.user.is_authenticated:
@@ -34,6 +52,7 @@ def detail(request):
     return render(request, 'app/detail.html', context)
 
 def search(request):
+    categories = Category.objects.filter(is_sub=False)
     if request.method == "POST":
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains= searched)
@@ -57,7 +76,7 @@ def search(request):
         cartItems = order['get_cart_items']
     products = Product.objects.all()
     context = {'products': products, 'cartItems': cartItems}
-    return render(request,'app/search.html', {"searched":searched,"keys":keys})
+    return render(request,'app/search.html', {"searched":searched,"keys":keys,"categories":categories})
 def register(request):
     form = CreateUserForm()
     
@@ -86,9 +105,11 @@ def loginPage(request):
             messages.info(request, 'Tên đăng nhập hoặc mật khẩu sai!')
 
     return render(request, 'app/login.html')
+
 def logoutPage(request):
     logout(request)
     return redirect('login')
+
 def home(request):
     if request.user.is_authenticated:
         customer, created = Customer.objects.get_or_create(
@@ -108,8 +129,10 @@ def home(request):
             'get_cart_total': 0
         }
         cartItems = order['get_cart_items']
+    categories = Category.objects.filter(is_sub=False)
+   
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    context = {'products': products, 'cartItems': cartItems,'categories':categories}
     return render(request, 'app/home.html', context)
 
 def cart(request):
@@ -131,8 +154,8 @@ def cart(request):
             'get_cart_total': 0
         }
         cartItems = order['get_cart_items']
-
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    categories = Category.objects.filter(is_sub=False)
+    context = {'items': items, 'order': order, 'cartItems': cartItems,'categories':categories}
     return render(request, 'app/cart.html', context)
 
 def checkout(request):

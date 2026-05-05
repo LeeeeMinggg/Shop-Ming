@@ -43,9 +43,10 @@
             Sản phẩm  
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Acc</a></li>
-            <li><a class="dropdown-item" href="#">Cày thuê</a></li>
-            <li><a class="dropdown-item" href="#">Buff bẩn</a></li>
+            {% for i in categories %}
+            <li><a class="dropdown-item" href="{% url 'category'%}?category={{i.slug}}">{{i.name}}</a></li>
+            {% endfor %}
+            
 
           </ul>
         </li>
